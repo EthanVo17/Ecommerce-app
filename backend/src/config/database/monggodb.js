@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 function connectDB() {
-    mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+  const DB_URI = 'mongodb://127.0.0.1:27017/ecommerce';
+  mongoose
+    .connect(DB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.error('Error connecting to MongoDB:', err));
 }
