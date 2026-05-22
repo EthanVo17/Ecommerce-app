@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 class authMiddleware {
   async protect(req, res, next) {
-    const token;
+    let token;
     if (!token) {
       res.status(401).json({ message: 'Not authorized, no token' });
     }
