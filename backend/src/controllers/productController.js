@@ -1,4 +1,4 @@
-const Product = require('../../models/productsModel');
+const Product = require('../models/productsModel');
 
 class ProductController {
   // [POST] /api/products (private)
