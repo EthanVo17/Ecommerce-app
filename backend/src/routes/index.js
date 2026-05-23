@@ -1,5 +1,6 @@
 const authRoutes = require('./authRoute');
 const productRoutes = require('./productRoute');
+const categoryRoutes = require('./categoryRoute');
 
 function route(app) {
   app.get('/', (req, res) => {
@@ -8,6 +9,8 @@ function route(app) {
 
   app.use('/api/auth', authRoutes);
   app.use('/api/products', productRoutes);
+
+  app.use('/api/categories', categoryRoutes);
 }
 
 module.exports = route;

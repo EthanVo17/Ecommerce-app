@@ -41,10 +41,12 @@ class ProductController {
     }
   }
 
-  // [GET] /api/products/:id (public)
+  // [GET] /api/products/:slug (public)
   async getProductById(req, res) {
     try {
-      const product = await Product.findById(req.params.findById);
+      const product = await Product.findOne({ slug: req.params.slug }).populate(
+        'category'
+      );
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
@@ -55,12 +57,14 @@ class ProductController {
     }
   }
 
-  // [PUT] /api/products/:id (private)
+  // [PUT] /api/products/:slug (private)
   async updateProduct(req, res) {
     const { name, description, price, category, images, brand, countInStock } =
       req.body;
     try {
-      const product = await Product.findById(req.params.id);
+      const product = await Product.findOne({ slug: req.params.slug }).populate(
+        'category'
+      );
       if (product) {
         product.name = name || product.name;
         product.description = description || product.description;
@@ -85,7 +89,7 @@ class ProductController {
   }
   async deleteProduct(req, res) {
     try {
-      const product = await Product.findByIdAndDelete(req.params.id);
+      const product = await Product.findOneAndDelete({ slug: req.params.slug });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
@@ -93,7 +97,7 @@ class ProductController {
     } catch (err) {
       res
         .status(500)
-        .json({ message: 'Error deleting product', error: error.message });
+        .json({ message: 'Error deleting product', error: err.message });
     }
   }
 }
