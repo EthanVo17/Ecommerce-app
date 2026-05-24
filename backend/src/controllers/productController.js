@@ -11,6 +11,7 @@ class ProductController {
         category,
         images,
         brand,
+        slug,
         countInStock,
       } = req.body;
       const product = new Product({
@@ -20,6 +21,7 @@ class ProductController {
         images,
         category,
         brand,
+        slug,
         countInStock,
       });
       await product.save();
@@ -31,10 +33,21 @@ class ProductController {
     }
   }
 
-  // [GET] /api/products (public)
+  // [GET] all /api/products (public)
   async getAllProducts(req, res) {
     try {
-      const products = await Product.find();
+      const keyword = req.query.keyword
+        ? {
+            name: {
+              $regex: req.query.keyword,
+              $options: 'i',
+            },
+          }
+        : {};
+      const products = await Product.find({ ...keyword }).populate(
+        'category',
+        'name slug'
+      );
       res.status(200).json(products);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -42,10 +55,19 @@ class ProductController {
   }
 
   // [GET] /api/products/:slug (public)
-  async getProductById(req, res) {
+  async getProduct(req, res) {
     try {
-      const product = await Product.findOne({ slug: req.params.slug }).populate(
-        'category'
+      const keyword = req.query.keyword
+        ? {
+            name: {
+              $regex: req.query.keyword,
+              $options: 'i',
+            },
+          }
+        : {};
+      const product = await Product.findOne({ ...keyword }).populate(
+        'category',
+        'name slug'
       );
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
@@ -59,8 +81,16 @@ class ProductController {
 
   // [PUT] /api/products/:slug (private)
   async updateProduct(req, res) {
-    const { name, description, price, category, images, brand, countInStock } =
-      req.body;
+    const {
+      name,
+      description,
+      price,
+      category,
+      images,
+      brand,
+      countInStock,
+      slug,
+    } = req.body;
     try {
       const product = await Product.findOne({ slug: req.params.slug }).populate(
         'category'
@@ -72,6 +102,7 @@ class ProductController {
         product.category = category || product.category;
         product.images = images || product.images;
         product.brand = brand || product.brand;
+        product.slug = slug || product.slug;
         product.countInStock =
           countInStock !== undefined ? countInStock : product.countInStock;
 
@@ -87,8 +118,11 @@ class ProductController {
       res.status(500).json({ message: err.message });
     }
   }
+
+  // [DELETE] /api/products/:slug (private)
   async deleteProduct(req, res) {
     try {
+      const productId = await Product.findOne({ _id: req.params._id });
       const product = await Product.findOneAndDelete({ slug: req.params.slug });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });

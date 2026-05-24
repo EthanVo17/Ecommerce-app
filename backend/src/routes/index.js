@@ -1,6 +1,7 @@
 const authRoutes = require('./authRoute');
 const productRoutes = require('./productRoute');
 const categoryRoutes = require('./categoryRoute');
+const cloudinaryRoutes = require('./cloudinaryRoute');
 
 function route(app) {
   app.get('/', (req, res) => {
@@ -11,6 +12,8 @@ function route(app) {
   app.use('/api/products', productRoutes);
 
   app.use('/api/categories', categoryRoutes);
+
+  app.use('/api/cloudinary', cloudinaryRoutes);
 }
 
 module.exports = route;

@@ -51,6 +51,13 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Vui lòng nhập tên thương hiệu'],
     },
 
+    slug: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+
     rating: {
       type: Number,
       default: 0,
