@@ -1,4 +1,4 @@
-import userRole from "./userRole";
+import userRole from "./userType";
 
 interface authRole {
     user: userRole | null;

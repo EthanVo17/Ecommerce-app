@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import authRole from "../roles/authRole";
+import { authType } from "types/";
 
-const useAuthStore = create<authRole>()(
+const useAuthStore = create<authType>()(
     persist((set) => ({
         user: null,
         token: null,

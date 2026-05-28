@@ -24,7 +24,11 @@
       "components/*": ["./src/components"],
       "hooks/*": ["./src/hooks"],
       "types/*": ["./src/types"],
-      "services/*": ["./src/services"]
+      "services/*": ["./src/services"],
+      "roles/*": ["./src/roles"],
+      "store/*": ["./src/stores"],
+      "utils/*": ["./src/utils"],
+      "components/Product/*": ["./src/components/Product"]
     }
   },
   "include": [
