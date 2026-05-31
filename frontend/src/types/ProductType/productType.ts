@@ -4,12 +4,12 @@ interface ProductRole {
     name: string;
     price: number;
     description: string,
-    image: string;
+    images: string[];
     category: string;
     brand: string;
     countInStock: number
-    rating: number;
-    numReviews: number;
+    rating?: number;
+    numReviews?: number;
 }
 
 export default ProductRole;

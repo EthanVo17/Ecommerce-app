@@ -1,10 +1,10 @@
 interface ProductInfoType {
     brand: string;
     name: string;
-    rating: number
-    numReviews: number;
     price: number;
     description: string;
+    numReviews?: number;
+    rating?: number;
 }
 
 export default ProductInfoType
