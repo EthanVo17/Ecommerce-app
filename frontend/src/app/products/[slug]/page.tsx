@@ -57,6 +57,8 @@ function ProductDetailPage({ params }: { params: { slug: string } }) {
               productId={mockProduct.id}
               name={mockProduct.name}
               countInStock={mockProduct.countInStock}
+              images={mockProduct.images}
+              price={mockProduct.price}
             />
           </div>
         </div>

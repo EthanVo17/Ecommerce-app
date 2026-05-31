@@ -2,9 +2,22 @@
 import React from 'react';
 
 import { ProductActionsType } from 'types/';
+import { useCartStore } from 'stores/';
 
-function ProductActions({ productId, name, countInStock }: ProductActionsType) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
+function ProductActions({
+  productId,
+  name,
+  countInStock,
+  price,
+  images,
+}: ProductActionsType) {
   const [quantity, setQuantity] = React.useState(1);
+
+  const addToCart = useCartStore((state) => state.addToCart);
+
   const handleQuantity = (type: 'inc' | 'dec') => {
     if (type === 'dec' && quantity > 1) {
       return setQuantity(quantity - 1);
@@ -16,7 +29,15 @@ function ProductActions({ productId, name, countInStock }: ProductActionsType) {
   };
 
   const handleAddToCart = () => {
-    alert(`Đã thêm ${quantity} sản phẩm ${name} vào giỏ hàng`);
+    addToCart({
+      productId,
+      name,
+      countInStock,
+      price,
+      images,
+      quantity,
+    });
+    alert(`Đã thêm ${quantity} sản phẩm ${name} ${productId} vào giỏ hàng`);
   };
 
   return (
@@ -60,7 +81,9 @@ function ProductActions({ productId, name, countInStock }: ProductActionsType) {
             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
         }`}
       >
-        {countInStock > 0 ? 'Thêm vào giỏ hàng 🛒' : 'Sản phẩm đã hết hàng'}
+        {countInStock > 0
+          ? `Thêm vào giỏ hàng ${(<FontAwesomeIcon icon={faCartShopping} />)}`
+          : 'Sản phẩm đã hết hàng'}
       </button>
     </>
   );

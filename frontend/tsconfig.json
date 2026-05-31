@@ -26,7 +26,7 @@
       "types/*": ["./src/types"],
       "services/*": ["./src/services"],
       "roles/*": ["./src/roles"],
-      "store/*": ["./src/stores"],
+      "stores/*": ["./src/stores"],
       "utils/*": ["./src/utils"],
       "components/Product/*": ["./src/components/Product"]
     }

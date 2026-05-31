@@ -1,10 +1,10 @@
-import userRole from "./userType";
+import userType from "./userType";
 
 interface authRole {
-    user: userRole | null;
+    user: userType | null;
     token: string | null;
 
-    setCredentials: (user: userRole, token: string) => void;
+    setCredentials: (user: userType, token: string) => void;
     logout: () => void;
 }
 

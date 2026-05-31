@@ -18,4 +18,4 @@ const useAuthStore = create<authType>()(
 )
 )
 
-export { useAuthStore };
+export default useAuthStore;

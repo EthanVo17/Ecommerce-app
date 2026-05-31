@@ -1,8 +1,8 @@
-interface userRole {
+interface userType {
     _id: string;
     name: string;
     email: string;
     role: string;
 }
 
-export default userRole;
+export default userType;
