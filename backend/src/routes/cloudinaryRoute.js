@@ -5,11 +5,6 @@ const CloudinaryController = require('../controllers/cloudinaryController');
 
 const authMiddleware = require('../middlewares/authMiddleWare');
 
-router.post(
-  '/',
-  authMiddleware.admin,
-  CloudinaryController.upload,
-  CloudinaryController.index
-);
+router.post('/', authMiddleware.admin, CloudinaryController.index);
 
 module.exports = router;

@@ -1,6 +1,11 @@
 import { Banner, Category, Product } from '@/src/components';
-import Header from '../Header/Header';
-export default function Home() {
+import Header from '../components/ui/Header/Header';
+import { ProductGrid } from 'components/Product/*';
+import { productService } from 'services/';
+import { ProductType } from '../types';
+
+export default async function Home() {
+  const products: ProductType[] = await productService.getProducts();
   return (
     <div className="text-gray-100 font-sans">
       <Header />
@@ -12,7 +17,7 @@ export default function Home() {
       <Category />
 
       {/* PRODUCT GRID */}
-      <Product />
+      <ProductGrid products={products} />
     </div>
   );
 }

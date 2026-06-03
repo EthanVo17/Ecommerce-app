@@ -1,6 +1,6 @@
 
-interface ProductRole {
-    id: string;
+interface ProductType {
+    _id: string;
     name: string;
     price: number;
     description: string,
@@ -12,4 +12,4 @@ interface ProductRole {
     numReviews?: number;
 }
 
-export default ProductRole;
+export default ProductType;

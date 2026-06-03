@@ -22,8 +22,8 @@ function ProductInfo({
 
       <div className="flex items-center gap-4 mb-6">
         <div className="flex text-yellow-400 text-lg">
-          {'★'.repeat(Math.floor(rating))}
-          {'☆'.repeat(5 - Math.floor(rating))}
+          {'★'.repeat(Math.floor(rating ?? 0))}
+          {'☆'.repeat(5 - Math.floor(rating ?? 0))}
         </div>
 
         <span className="text-gray-400 text-sm">({numReviews} đánh giá)</span>

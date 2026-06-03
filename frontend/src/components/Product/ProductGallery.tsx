@@ -12,15 +12,14 @@ function ProductGallery({ images }: ProductGalleryType) {
       <div className="bg-gray-700 aspect-square rounded-xl flex items-center justify-center text-gray-400 font-medium border border-gray-600 overflow-hidden relative group">
         <div className="absolute inset-0 bg-gradient-to-tr from-gray-800 to-transparent opacity-50 z-10"></div>
         {mainImage === 'mock' ? (
-          ''
-        ) : (
           <img
             src={mainImage}
             alt="Main image"
             className="object-cover w-full h-full"
           />
+        ) : (
+          ''
         )}
-        s
       </div>
 
       <div className="grid grid-cols-4 gap-4">

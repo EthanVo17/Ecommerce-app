@@ -28,7 +28,9 @@
       "roles/*": ["./src/roles"],
       "stores/*": ["./src/stores"],
       "utils/*": ["./src/utils"],
-      "components/Product/*": ["./src/components/Product"]
+      "components/Product/*": ["./src/components/Product"],
+      "components/ui/*": ["./src/components/ui"],
+      "mocks/*": ["./src/mock"]
     }
   },
   "include": [

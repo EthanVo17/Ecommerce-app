@@ -1,5 +1,7 @@
 const express = require('express');
 
-function homeCOntroller(req, res) {
+const homeController = (req, res) => {
   res.json({ message: 'Welcome to the E-commerce API' });
-}
+};
+
+module.exports = new homeController();

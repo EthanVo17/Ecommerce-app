@@ -66,3 +66,5 @@ function ProductDetailPage({ params }: { params: { slug: string } }) {
     </div>
   );
 }
+
+export default ProductDetailPage;

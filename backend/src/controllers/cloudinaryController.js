@@ -34,4 +34,4 @@ class CloudinaryController {
   }
 }
 
-module.exports = { CloudinaryController, upload };
+module.exports = new CloudinaryController();

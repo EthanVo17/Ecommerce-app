@@ -8,9 +8,9 @@ const useAuthStore = create<authType>()(
         user: null,
         token: null,
         
-        setCredentials: (user, token) => set({user, token}) ,
+        setCredentials: (user, token) => set({user, token}),
         
-        logout: () => set({user: null, token: null}) ,
+        logout: () => set({user: null, token: null}),
     }),
     {
       name: "auth-storage",
