@@ -2,8 +2,8 @@ export { default as Banner } from './ui/Banner/Banner';
 export { default as Category } from './ui/Category/Category';
 export { default as Product } from './Product/Product';
 
-export { default as InputField } from './ui/InputField';
-export { default as SubmitButton } from './ui/submitButton';
+export { default as InputField } from './ui/InputUI/InputField';
+export { default as SubmitButton } from './ui/SubmitButton/submitButton';
 
 //auth
 export { default as LoginForm } from './auth/LoginForm';
