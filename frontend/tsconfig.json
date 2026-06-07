@@ -30,7 +30,8 @@
       "utils/*": ["./src/utils"],
       "components/Product/*": ["./src/components/Product"],
       "components/ui/*": ["./src/components/ui"],
-      "mocks/*": ["./src/mock"]
+      "mocks/*": ["./src/mock"],
+      "auth/*": ["./src/components/auth"]
     }
   },
   "include": [

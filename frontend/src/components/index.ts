@@ -11,3 +11,5 @@ export { default as RegisterForm } from './auth/RegisterForm';
 
 export { default as Header } from "./ui/Header/Header";
 export { default as Footer } from './ui/Footer/Footer';
+
+export { default as PasswordInput } from './ui/InputUI/passwordInput';

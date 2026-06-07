@@ -1,10 +1,18 @@
-function SubmitButton({
-  children,
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+interface SubmitTypes {
+  isLoading: any;
+  children: any;
+}
+
+function SubmitButton({ isLoading, children }: SubmitTypes) {
   return (
     <button
+      disabled={isLoading}
       type="submit"
-      className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-900 transition-colors"
+      className={`w-full py-2 px-4 text-white font-semibold rounded-md transition-colors cursor-pointer ${
+        isLoading
+          ? 'bg-blue-400 cursor-not-allowed'
+          : 'bg-blue-600 hover:bg-blue-700'
+      }`}
     >
       {children}
     </button>

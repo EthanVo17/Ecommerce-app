@@ -7,3 +7,7 @@ export type { default as ProductInfoType } from './ProductType/ProductInfoType'
 export type { default as ProductActionsType } from './ProductType/ProductActionsProps'
 
 export type { CartType, CartState } from './CartType/CartType'
+
+export type { default as InputFieldTypes } from './InputFieldTypes/InputFieldTypes'
+
+export type { default as PasswordInputTypes } from './PasswordInputTypes/PasswordInputTypes'
