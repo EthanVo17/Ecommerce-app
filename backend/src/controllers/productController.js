@@ -81,17 +81,18 @@ class ProductController {
 
   // [PUT] /api/products/:slug (private)
   async updateProduct(req, res) {
-    const {
-      name,
-      description,
-      price,
-      category,
-      images,
-      brand,
-      countInStock,
-      slug,
-    } = req.body;
     try {
+      const {
+        name,
+        description,
+        price,
+        category,
+        images,
+        brand,
+        countInStock,
+        slug,
+      } = req.body;
+
       const product = await Product.findOne({ slug: req.params.slug }).populate(
         'category'
       );

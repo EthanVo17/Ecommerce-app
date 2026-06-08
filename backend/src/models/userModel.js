@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Vui lòng nhập tên hợp lệ'],
       trim: true,
     },
     email: {
@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema(
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product', // Tham chiếu đến collection Product
+          ref: 'Product',
           required: true,
         },
         quantity: {
@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// middleware để hash mật khẩu trước khi lưu vào database
+// middleware để hash mật khẩu trước khi lưu vào databasewd
 userSchema.pre('save', async function () {
   if (!this.isModified('password')) {
     return;

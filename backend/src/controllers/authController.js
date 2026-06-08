@@ -1,34 +1,52 @@
-const userModel = require('../models/userModel');
 const refreshTokenModel = require('../models/refreshTokenModel');
 const { generateAccessToken } = require('../jwt/authjwt');
 
+const userModel = require('../models/userModel');
+
 class authController {
   // [POST] /api/auth/register
-  async register(req, res, next) {
+  async register(req, res) {
     try {
       const { name, email, password } = req.body;
+
+      if (!name || !email || !password) {
+        res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin.' });
+        return;
+      }
       // Kiểm tra xem email đã tồn tại chưa
       const EmailExist = await userModel.findOne({ email });
+
       if (EmailExist) {
         return res.status(400).json({ message: 'Email already exists' });
       }
 
-      const user = await userModel.create({ name, email, password });
-      if (user) {
+      const NewUser = await userModel.create({
+        name,
+        email,
+        password,
+      });
+
+      if (NewUser) {
         res.status(201).json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
+          name: NewUser.name,
+          email: NewUser.email,
+          role: NewUser.role,
+          message: 'Đăng ký tài khoản thành công!',
+        });
+      } else {
+        res.status(400).json({
+          message: 'Dữ liệu người dùng không hợp lệ.',
         });
       }
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res
+        .status(500)
+        .json({ message: 'Lỗi server. Vui lòng thử lại sau.', err });
     }
   }
 
   //[POST] /api/auth/login
-  async login(req, res, next) {
+  async login(req, res) {
     try {
       const { name, email, password } = req.body;
       const user = await userModel.findOne({ email });

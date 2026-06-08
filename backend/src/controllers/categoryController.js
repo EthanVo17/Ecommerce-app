@@ -77,9 +77,7 @@ class CategoryController {
       }
 
       await Category.findByIdAndDelete(req.params.id);
-      return res
-        .statuss(200)
-        .json({ message: 'Category deleted successfully' });
+      return res.status(200).json({ message: 'Category deleted successfully' });
     } catch (err) {
       return res
         .status(500)

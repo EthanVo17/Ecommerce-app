@@ -55,8 +55,8 @@ function RegisterForm() {
 
     try {
       setIsLoading(true);
-      await api.post('/users', formData);
-      console.log('data:', formData);
+      await api.post('/auth/register', formData);
+      // console.log('data:', formData);
 
       router.push('/login');
     } catch (error: any) {

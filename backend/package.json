@@ -27,6 +27,7 @@
     "slugify": "^1.6.9"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "prettier": "3.8.3"
   }
 }
