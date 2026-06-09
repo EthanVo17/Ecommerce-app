@@ -1,13 +1,17 @@
 const refreshTokenModel = require('../models/refreshTokenModel');
 const { generateAccessToken } = require('../jwt/authjwt');
+const express = require('express');
+const router = express.Router();
 
 const userModel = require('../models/userModel');
 
 class authController {
   // [POST] /api/auth/register
+
   async register(req, res) {
+    const SaltHash = 10;
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, cfpassword } = req.body;
 
       if (!name || !email || !password) {
         res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin.' });
@@ -24,6 +28,15 @@ class authController {
         name,
         email,
         password,
+      });
+
+      // middleware để hash mật khẩu trước khi lưu vào database
+      NewUser.pre('save', async function () {
+        if (!this.isModified('password')) {
+          return;
+        }
+        const salt = await bcrypt.genSalt(SaltHash);
+        this.password = await bcrypt.hash(this.password, salt);
       });
 
       if (NewUser) {
@@ -48,8 +61,16 @@ class authController {
   //[POST] /api/auth/login
   async login(req, res) {
     try {
-      const { name, email, password } = req.body;
+      const { email, password } = req.body;
       const user = await userModel.findOne({ email });
+
+      // phương thức để so sánh mật khẩu khi đăng nhập
+      const isMatchPassword = await bcrypt.compare(password, user.password);
+
+      if (!isMatchPassword) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+
       if (user && (await user.matchPassword(password))) {
         const { accessToken, refreshToken } = generateAccessToken(user);
 
@@ -76,8 +97,6 @@ class authController {
             role: user.role,
           },
         });
-      } else {
-        res.status(401).json({ message: 'Invalid email or password' });
       }
     } catch (err) {
       res.status(500).json({ message: 'Lỗi server', err: err.message });
