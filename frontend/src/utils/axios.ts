@@ -5,8 +5,7 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json'
     }   
-})
-
+});
 
 api.interceptors.request.use((config) => {
     if(typeof window !== 'undefined'){
@@ -24,6 +23,6 @@ api.interceptors.request.use((config) => {
     (error) => {
         return Promise.reject(error);
     }
-)
+);
 
 export default api;

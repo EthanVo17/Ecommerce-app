@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { api } from 'utils/';
+import { axiosClient } from 'utils/';
 import { InputField, SubmitButton } from 'components/*';
 import { PasswordInput } from 'components/';
 
@@ -55,8 +55,7 @@ function RegisterForm() {
 
     try {
       setIsLoading(true);
-      await api.post('/auth/register', formData);
-      // console.log('data:', formData);
+      await axiosClient.post('/auth/register', formData);
 
       router.push('/login');
     } catch (error: any) {

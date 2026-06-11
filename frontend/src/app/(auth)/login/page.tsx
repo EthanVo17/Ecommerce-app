@@ -1,4 +1,6 @@
 // file: src/app/(auth)/login/page.tsx
+import React from 'react';
+import Link from 'next/link';
 import { LoginForm } from 'components/*';
 
 export default function LoginPage() {
