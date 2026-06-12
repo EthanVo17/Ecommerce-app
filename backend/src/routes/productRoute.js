@@ -9,8 +9,8 @@ router.get('/', ProductController.getAllProducts);
 router.get('/:slug', ProductController.getProduct);
 
 //private routes
-router.post('/', authMiddleware.admin, ProductController.createProduct);
-router.put('/:slug', authMiddleware.admin, ProductController.updateProduct);
-router.delete('/:slug', authMiddleware.admin, ProductController.deleteProduct);
+router.post('/', authMiddleware.protect, authMiddleware.admin, ProductController.createProduct);
+router.put('/:slug', authMiddleware.protect, authMiddleware.admin, ProductController.updateProduct);
+router.delete('/:slug', authMiddleware.protect, authMiddleware.admin, ProductController.deleteProduct);
 
 module.exports = router;

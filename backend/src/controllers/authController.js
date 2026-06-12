@@ -9,7 +9,7 @@ const userModel = require('../models/userModel');
 class authController {
   // [POST] /api/auth/register
 
-  async register(req, res) {
+  async register(req, res, next) {
     try {
       const { name, email, password } = req.body;
 
@@ -36,14 +36,14 @@ class authController {
       });
 
       if (NewUser) {
-        res.status(201).json({
+        return res.status(201).json({
           name: NewUser.name,
           email: NewUser.email,
           role: NewUser.role,
           message: 'Đăng ký tài khoản thành công!',
         });
       } else {
-        res.status(400).json({
+        return res.status(400).json({
           message: 'Dữ liệu người dùng không hợp lệ.',
         });
       }
@@ -56,7 +56,7 @@ class authController {
   }
 
   //[POST] /api/auth/login
-  async login(req, res) {
+  async login(req, res, next) {
     try {
       const { email, password } = req.body;
       const user = await userModel.findOne({ email });
@@ -87,7 +87,7 @@ class authController {
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
-      res.status(200).json({
+      return res.status(200).json({
         message: 'Login successful',
         accessToken,
         user: {
@@ -98,7 +98,7 @@ class authController {
         },
       });
     } catch (err) {
-      res.status(500).json({ message: 'Lỗi server', err: err.message });
+      return res.status(500).json({ message: 'Lỗi server', err: err.message });
     }
   }
 }
