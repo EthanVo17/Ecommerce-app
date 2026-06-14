@@ -9,7 +9,10 @@ export { default as SubmitButton } from './ui/SubmitButton/submitButton';
 export { default as LoginForm } from './auth/LoginForm';
 export { default as RegisterForm } from './auth/RegisterForm';
 
-export { default as Header } from "./ui/Header/Header";
+export { default as Header } from './ui/Header/Header';
 export { default as Footer } from './ui/Footer/Footer';
 
 export { default as PasswordInput } from './ui/InputUI/passwordInput';
+
+// Product components
+export { default as ProductGrid } from './Product/ProductGrid';

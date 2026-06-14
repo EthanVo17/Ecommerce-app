@@ -1,15 +1,19 @@
-import { Banner, Category, Product } from '@/src/components';
-import Header from '../components/ui/Header/Header';
-import { ProductGrid } from 'components/Product/*';
-import { productService } from 'services/';
-import { ProductType } from '../types';
+import { Banner, Category } from '@/src/components';
+import { ProductGrid } from '@/src/components/Product';
+import { productService } from '@/src/services';
+import { ProductType } from '@/src/types';
 
 export default async function Home() {
-  const products: ProductType[] = await productService.getProducts();
-  return (
-    <div className="text-gray-100 font-sans">
-      <Header />
+  let products: ProductType[] = [];
 
+  try {
+    products = await productService.getProducts();
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+  }
+
+  return (
+    <div className="text-gray-100">
       {/* HERO BANNER */}
       <Banner />
 

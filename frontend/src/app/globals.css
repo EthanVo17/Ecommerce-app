@@ -1,1 +1,160 @@
 @import "tailwindcss";
+
+/* ==========================================
+   TECHSTORE DESIGN SYSTEM
+   Color Palette: Cyan + Indigo + Deep Navy
+   Style: Dark Premium + Glassmorphism
+   ========================================== */
+
+/* === CSS Custom Properties === */
+:root {
+  --color-primary: #06b6d4;
+  --color-primary-light: #22d3ee;
+  --color-secondary: #6366f1;
+  --color-secondary-light: #818cf8;
+  --color-accent: #8b5cf6;
+  --color-bg-deep: #050510;
+  --color-bg-dark: #0a0a1a;
+  --color-bg-surface: #111827;
+  --color-bg-card: #16162a;
+  --color-bg-card-hover: #1e1e38;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(6, 182, 212, 0.4);
+}
+
+/* === Keyframe Animations === */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.02); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) scale(1.02); }
+  50% { transform: translateY(15px) scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* === Base Styles === */
+body {
+  background-color: var(--color-bg-deep);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-primary-light), var(--color-secondary-light));
+}
+
+::selection {
+  background-color: rgba(6, 182, 212, 0.3);
+  color: white;
+}
+
+/* === Glassmorphism === */
+.glass {
+  background: rgba(10, 10, 26, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border);
+}
+
+.glass-card {
+  background: rgba(22, 22, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+/* === Gradient Text === */
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === Glow Effects === */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25),
+              0 0 60px rgba(6, 182, 212, 0.08);
+}
+
+.glow-cyan-sm {
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.2),
+              0 0 30px rgba(6, 182, 212, 0.06);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25),
+              0 0 60px rgba(99, 102, 241, 0.08);
+}
+
+/* === Card Hover Lift === */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 12px 40px rgba(6, 182, 212, 0.12),
+              0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* === Stagger Animation Delays === */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
