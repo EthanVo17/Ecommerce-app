@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxLength: [120, 'Tên sản phẩm không được vượt quá 120 ký tự'],
     },
+
     description: {
       type: String,
       required: [true, 'Vui lòng nhập mô tả sản phẩm'],
@@ -18,6 +19,7 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Vui lòng nhập giá sản phẩm'],
       min: [0, 'Giá sản phẩm không thể là số âm'],
     },
+
     discountPrice: {
       type: Number,
       validate: {
@@ -27,6 +29,7 @@ const productSchema = new mongoose.Schema(
         message: 'Giá giảm phải nhỏ hơn giá gốc',
       },
     },
+
     countInStock: {
       type: Number,
       required: [true, 'Vui lòng nhập số lượng trong kho'],
@@ -46,8 +49,10 @@ const productSchema = new mongoose.Schema(
       ref: 'Category',
       required: true,
     },
+
     brand: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Brand',
       required: [true, 'Vui lòng nhập tên thương hiệu'],
     },
 
@@ -58,12 +63,18 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
 
+    specs: {
+      type: Map,
+      of: String,
+    },
+
     rating: {
       type: Number,
       default: 0,
       min: 0,
       max: 5,
     },
+
     numReviews: {
       type: Number,
       default: 0,

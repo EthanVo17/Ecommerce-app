@@ -5,7 +5,7 @@ class CategoryController {
   //[Post] /api/categories
   async createCategory(req, res) {
     try {
-      const { name, description, parentCategory, image } = req.body;
+      const { name, parentCategory } = req.body;
 
       const existingCategory = await Category.findOne({ name });
       if (existingCategory) {
@@ -14,22 +14,20 @@ class CategoryController {
           .json({ message: 'Category name already exists' });
       }
 
-      const slug = slugify(name, { lower: true, strict: true, locale: vi });
+      const slug = slugify(name, { lower: true, strict: true, locale: 'vi' });
       const newCategory = new Category({
         name,
-        description,
         parentCategory: parentCategory || null,
-        image,
         slug,
       });
 
       const createdCategory = await newCategory.save();
-      res.status(201).json({
+      return res.status(201).json({
         message: 'Category created successfully',
         category: createdCategory,
       });
     } catch (err) {
-      res
+      return res
         .status(500)
         .json({ message: 'Error creating category', error: err.message });
     }
@@ -38,29 +36,29 @@ class CategoryController {
   //[Put] /api/categories/:id
   async updateCategory(req, res) {
     try {
-      const { name, description, parentCategory, image } = req.body;
+      const { name, parentCategory } = req.body;
 
-      const categoryId = await Category.findById(req.params.id);
-      if (!categoryID) {
+      const category = await Category.findById(req.params.id);
+      if (!category) {
         return res.status(404).json({ message: 'Category not found' });
       }
 
-      if (categoryId) {
-        Category.name = name || categoryId.name;
-        if (name) {
-          Category.slug = slugify(name, {
-            lower: true,
-            strict: true,
-            locale: vi,
-          });
-        }
-        Category.description = description || categoryId.description;
-        Category.parentCategory =
-          parentCategory !== undefined
-            ? parentCategory
-            : categoryId.parentCategory;
-        Category.image = image || categoryId.image;
+      category.name = name || category.name;
+      if (name) {
+        category.slug = slugify(name, {
+          lower: true,
+          strict: true,
+          locale: 'vi',
+        });
       }
+      category.parentCategory =
+        parentCategory !== undefined ? parentCategory : category.parentCategory;
+
+      const updatedCategory = await category.save();
+      return res.status(200).json({
+        message: 'Category updated successfully',
+        category: updatedCategory,
+      });
     } catch (err) {
       return res
         .status(500)
@@ -71,8 +69,8 @@ class CategoryController {
   //[Delete] /api/categories/:id
   async deleteCategory(req, res) {
     try {
-      const categoryId = await Category.findById(req.params.id);
-      if (!categoryId) {
+      const category = await Category.findById(req.params.id);
+      if (!category) {
         return res.status(404).json({ message: 'Category not found' });
       }
 
@@ -89,11 +87,11 @@ class CategoryController {
   async getCategory(req, res) {
     try {
       const categorySlug = req.params.slug;
-      const categories = await Category.findOne({ slug: categorySlug });
-      if (!categories) {
+      const category = await Category.findOne({ slug: categorySlug });
+      if (!category) {
         return res.status(404).json({ message: 'Category not found' });
       }
-      res.json({ category: categories });
+      return res.json({ category });
     } catch (err) {
       return res
         .status(500)
@@ -105,7 +103,7 @@ class CategoryController {
   async getAllCategories(req, res) {
     try {
       const categories = await Category.find({}).lean();
-      res.status(200).json(categories);
+      return res.status(200).json(categories);
     } catch (err) {
       return res
         .status(500)

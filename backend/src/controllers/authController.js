@@ -1,21 +1,17 @@
 const bcrypt = require('bcryptjs');
 const refreshTokenModel = require('../models/refreshTokenModel');
 const { generateAccessToken } = require('../jwt/authjwt');
-const express = require('express');
-const router = express.Router();
 
 const userModel = require('../models/userModel');
 
 class authController {
   // [POST] /api/auth/register
-
-  async register(req, res, next) {
+  async register(req, res) {
     try {
       const { name, email, password } = req.body;
 
       if (!name || !email || !password) {
-        res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin.' });
-        return;
+        return res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin.' });
       }
 
       // Kiểm tra xem email đã tồn tại chưa
@@ -56,7 +52,7 @@ class authController {
   }
 
   //[POST] /api/auth/login
-  async login(req, res, next) {
+  async login(req, res) {
     try {
       const { email, password } = req.body;
       const user = await userModel.findOne({ email });

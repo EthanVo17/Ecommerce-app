@@ -2,6 +2,7 @@ const authRoutes = require('./authRoute');
 const productRoutes = require('./productRoute');
 const categoryRoutes = require('./categoryRoute');
 const cloudinaryRoutes = require('./cloudinaryRoute');
+const brandRoutes = require('./brandsRoute');
 
 function route(app) {
   app.get('/', (req, res) => {
@@ -12,6 +13,8 @@ function route(app) {
   app.use('/api/products', productRoutes);
 
   app.use('/api/categories', categoryRoutes);
+
+  app.use('/api/brands', brandRoutes);
 
   app.use('/api/cloudinary', cloudinaryRoutes);
 }

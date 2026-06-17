@@ -17,17 +17,6 @@ const categorySchema = new mongoose.Schema(
       lowercase: true,
     },
 
-    image: {
-      type: String,
-      default: 'https://your-default-image-url.com/category-placeholder.png',
-    },
-
-    description: {
-      type: String,
-      trim: true,
-      maxLength: [200, 'Mô tả không được vượt quá 200 ký tự'],
-    },
-
     parentCategory: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
